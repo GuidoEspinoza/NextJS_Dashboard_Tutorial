@@ -1,5 +1,4 @@
 'use client';
-
 import { lusitana } from '@/app/ui/fonts';
 import {
   AtSymbolIcon,
@@ -11,18 +10,18 @@ import { Button } from './button';
 import { useFormState, useFormStatus } from 'react-dom';
 import { authenticate } from '@/app/lib/actions';
 
+function LoginButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <Button className="mt-4 w-full" aria-disabled={pending}>
+      Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+    </Button>
+  );
+}
+
 export default function LoginForm() {
   const [errorMessage, formAction] = useFormState(authenticate, undefined);
-
-  function LoginButton() {
-    const { pending } = useFormStatus();
-
-    return (
-      <Button className="mt-4 w-full" aria-disabled={pending}>
-        Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
-      </Button>
-    );
-  }
   return (
     <form action={formAction} className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
